@@ -3,15 +3,45 @@
     <head>
         <link rel="stylesheet" href="common.css" />
         <meta charset="UTF-8" />
-        <title>レベル6は "level6.html"</title>
+        <title>隠しページ レベル5</title>
     </head>
     <style>
+        body {
+            overflow-x: hidden;
+        }
+        
+        .hidden {
+            color: #00a;
+            left: -80px;
+            position: fixed;
+            top: 60%;
+        }
+
+        .hidden:hover {
+            cursor: pointer;
+            text-decoration: underline;
+        }
     </style>
     <body>
         <h1>隠しページ レベル5</h1>
         <p>
-            もしかして、簡単すぎますか？<br />
+            「タイトル」に気づけるとは...只者ではなさそうですね。<br />
+            それでは、これならいかがでしょう？脱出ゲームの基本ですよ。<br />
+            とにかく試行！試してみてください！
         </p>
+        <a id="hidden" class="hidden" href="#">Level6へ</a>
     </body>
     <script src="common.js" defer></script>
+    <script>
+        const hiddenLink = document.getElementById("hidden");
+        let x = -80;
+        window.addEventListener("click", () => {
+            x += 1;
+            hiddenLink.style.left = x + "px";
+        });
+
+        hiddenLink.addEventListener("click", () => {
+            hiddenLink.href = "\x73\x69\x78\x2e\x68\x74\x6d\x6c";
+        });
+    </script>
 </html>

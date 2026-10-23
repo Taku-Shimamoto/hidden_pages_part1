@@ -1,15 +1,63 @@
 <!DOCTYPE html>
 <html lang="ja">
     <head>
-        <meta charset="utf-8">
-        <title>�B���y�[�W ���x��9</title>
+        <link rel="stylesheet" href="common.css" />
+        <meta charset="UTF-8">
+        <title>隠しページ レベル9</title>
     </head>
     <body>
-        <h1>���x��9</h1>
-        <p>���̕��͂��ǂ߂Ȃ���ł����H�ǂ߂Ȃ��Ă��\�[�X�����Ă���������</p>
-        <p>c��t��r��l��+��u�����ł�</p>
-        <!--
-        next -> JU.html
-        -->
+        <h1>隠しページ レベル9</h1>
+        <p>ここまでこれるとは・・・さすがです！次の文章も読んでみてください！</p>
+        <p>ヒントはこのページと先ほど開いたものの比較をすることです。何かが違うはずです。</p>
+        <p>1&lt; = l<span style="padding-left:30px;">12&gt; = gt</span><span style="padding-left:30px;">1&pound; = p</span><span style="padding-left:30px;">のとき、</span></p>
+        <p>5&pound; 1&copy; 12&Aring; 3&ccedil; 2&AElig; 4&micro;</p>
+        <input id="answer" type="text" placeholder="答えを入力">
+        <button id="submit">回答する</button>
+        <p id="result"></p>
     </body>
+    <script>
+        const correctHash =
+            "3dd61ad59a4fbd5418ca62db051d92442114df119ed7b139e6fd09b5afc55053";
+
+        const encryptedPath = [
+            123, 159, 84, 148, 214, 16, 241, 17,
+            78, 143, 46, 245, 109, 105, 255, 40
+        ];
+
+        document.getElementById("submit").addEventListener("click", async () => {
+            const answer = document.getElementById("answer").value.trim();
+
+            const data = new TextEncoder().encode(answer);
+            const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+            const hashBytes = new Uint8Array(hashBuffer);
+
+            const hash = Array.from(hashBytes)
+                .map(byte => byte.toString(16).padStart(2, "0"))
+                .join("");
+
+            if (hash === correctHash) {
+                const nextPath = encryptedPath
+                    .map((code, i) =>
+                        String.fromCharCode(
+                            code ^ hashBytes[i % hashBytes.length]
+                        )
+                    )
+                    .join("");
+
+                const link = document.createElement("a");
+                link.href = nextPath;
+                link.textContent = "最終問題へ";
+
+                const result = document.getElementById("result");
+                result.textContent = "見事！次が最終問題です。";
+                result.appendChild(document.createElement("br"));
+                result.appendChild(link);
+            } else {
+                document.getElementById("result").textContent =
+                    "答えが違うみたいです。";
+            }
+        });
+    </script>
 </html>
+
+

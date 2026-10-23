@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang = "ja">
     <head>
+        <link rel="stylesheet" href="common.css" />
         <meta charset="utf-8"/>
-        <title>隠しページ レベル8</title>
+        <title>隠しページ レベル7</title>
     </head>
     <style>
         .button{
@@ -13,24 +14,25 @@
             display:flex;
             cursor: pointer;
             height: 50px;width:50px;
+        } 
+        .elevator{
+            padding:30px;
+            margin-left:50%;
+            width:200px;
+            display:flex;
+            justify-content:center;
+            gap: 40px;
+            flex-wrap: wrap;
+            border: 1px black solid;
         }
     </style>
     <body>
-        <h1>レベル8</h1>
+        <h1>隠しページ レベル7</h1>
         <p>ここまでくるとは・・・なかなかやりますね。
-            <br>次は12階で待っています。
+            <br />次は12階で待っています。
             そこのエレベーターにでも乗って来てください
         </p>
-        <div style="
-        padding:30px;
-        margin-left:200px;
-        width:200px;
-        display:flex;
-        justify-content:center;
-        gap: 40px;
-        flex-wrap: wrap;
-        border: 1px black solid;
-        ">
+        <div class="elevator">
             <div class="button" onclick="alert('ここは12階ではありません')">13</div>
             <div class="button" onclick="alert('ここは12階ではありません')">11</div>
             <div class="button" onclick="alert('ここは12階ではありません')">10</div>
@@ -46,6 +48,6 @@
         </div>
     </body>
     <script>
-        (()=>{let _0x17=[0x31,0x72,0x19,0xa4,0x53,0x28,0xc1,0x47],_0x28=_0x17.map((v,i)=>(v^(i*17+0x23))&255),_0x39=_0x28.filter((v,i)=>(v+i)%3!==1),_0x4a=_0x39.reduce((a,v,i)=>((a<<1)^v^i)&65535,0x5a),_0x5b=Array.from({length:16},(_,i)=>(_0x4a+i*13)%97),_0x6c=_0x5b.map((v,i)=>String.fromCharCode((v*7+i*11)%26+97)).join(""),_0x7d=[_0x6c,_0x4a.toString(16),_0x28.join("")].join("|").split("").reverse().join(""),_0x8e=["ne","xt","();"].join(""),_0x9f=["と入力","してください"].join(""),_0xaa=[99,111,110,115,111,108,101].map(v=>String.fromCharCode(v)).join(""),_0xbb=[108,111,103].map(v=>String.fromCharCode(v)).join(""),_0xcc=["kyu",".html"].join(""),_0xdd=[_0x8e,_0x9f].join(""),_0xee=(_0x7d.length+_0x5b.length+_0x39.length);if(_0xee>0){globalThis[_0xaa][_0xbb](_0xdd);globalThis.next=()=>{location.href=_0xcc}}})();
+        (()=>{let _0x17=[0x31,0x72,0x19,0xa4,0x53,0x28,0xc1,0x47],_0x28=_0x17.map((v,i)=>(v^(i*17+0x23))&255),_0x39=_0x28.filter((v,i)=>(v+i)%3!==1),_0x4a=_0x39.reduce((a,v,i)=>((a<<1)^v^i)&65535,0x5a),_0x5b=Array.from({length:16},(_,i)=>(_0x4a+i*13)%97),_0x6c=_0x5b.map((v,i)=>String.fromCharCode((v*7+i*11)%26+97)).join(""),_0x7d=[_0x6c,_0x4a.toString(16),_0x28.join("")].join("|").split("").reverse().join(""),_0x8e=["ne","xt","();"].join(""),_0x9f=["と入力","してください"].join(""),_0xaa=[99,111,110,115,111,108,101].map(v=>String.fromCharCode(v)).join(""),_0xbb=[108,111,103].map(v=>String.fromCharCode(v)).join(""),_0xcc=["8",".html"].join(""),_0xdd=[_0x8e,_0x9f].join(""),_0xee=(_0x7d.length+_0x5b.length+_0x39.length);if(_0xee>0){globalThis[_0xaa][_0xbb](_0xdd);globalThis.next=()=>{location.href=_0xcc}}})();
     </script>
 </html> 
