@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <link rel="stylesheet" href="common.css" />
+        <meta charset="UTF-8" />
+        <title>隠しページ レベル6</title>
+    </head>
+    <style>
+        body {
+            overflow-x: hidden;
+        }
+        
+        .hidden {
+            color: #00a;
+            left: -80px;
+            position: fixed;
+            top: 60%;
+        }
+
+        .hidden:hover {
+            cursor: pointer;
+            text-decoration: underline;
+        }
+    </style>
+    <body>
+        <h1>隠しページ レベル6</h1>
+        <p>
+            「タイトル」に気づけるとは...只者ではなさそうですね。<br />
+            それでは、これならいかがでしょう？
+        </p>
+        <a id="hidden" class="hidden" href="#">Level7へ</a>
+    </body>
+    <script src="common.js" defer></script>
+    <script>
+        const hiddenLink = document.getElementById("hidden");
+        let x = -80;
+        window.addEventListener("click", () => {
+            x += 1;
+            hiddenLink.style.left = x + "px";
+        });
+
+        hiddenLink.addEventListener("click", () => {
+            hiddenLink.href = "\x73\x65\x76\x65\x6e\x2e\x68\x74\x6d\x6c";
+        });
+    </script>
+</html>

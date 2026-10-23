@@ -1,0 +1,22 @@
+body {
+    margin-inline: auto;
+    width: 1280px;
+}
+
+section {
+    margin-inline: auto;
+    width: 1080px;
+}
+
+a {
+    color: #00c;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+input.hidden {
+    display: none;
+}

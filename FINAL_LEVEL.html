@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <style>
+        #hiddenText {
+            user-select: none;
+            -webkit-user-select: none;
+        }
+</style>
+    </head>
+    <body>
+        <h1>レベル11</h1>
+        <p>え？読めないですって？何度も読んだらいいんじゃないでしょうか？ほら！今までの知識も総動員して！</p>
+        <p>
+            面白そうなもの見つけたのでおいておきますね
+            <input type="text" id="textcolor"
+                value="white"   
+                style="width:80px; margin-left:20px;">
+            <input type="color" id="pickedColor"
+                value="#FFFFFF"
+                style="margin-left:20px;">
+        </p>
+        <p style="overflow-wrap:anywhere;">&amp;#38;&amp;#35;&amp;#56;&amp;#55;&amp;#x3B;&amp;#x26;&amp;#x23;&amp;#49;&amp;#48;&amp;#x34;&amp;#x3B;&amp;#x26;&amp;#x23;&amp;#57;&amp;#x37;&amp;#59;&amp;#38;&amp;#35;&amp;#x31;&amp;#49;&amp;#54;&amp;#59;&amp;#38;&amp;#35;&amp;#120;&amp;#x32;&amp;#48;&amp;#59;&amp;#38;&amp;#35;&amp;#120;&amp;#x36;&amp;#x33;&amp;#59;&amp;#38;&amp;#35;&amp;#x31;&amp;#49;&amp;#x31;&amp;#59;&amp;#38;&amp;#35;&amp;#x31;&amp;#x30;&amp;#56;&amp;#59;&amp;#38;&amp;#35;&amp;#x31;&amp;#49;&amp;#x31;&amp;#59;&amp;#38;&amp;#35;&amp;#x31;&amp;#49;&amp;#52;&amp;#59;&amp;#38;&amp;#35;&amp;#120;&amp;#x32;&amp;#48;&amp;#59;&amp;#38;&amp;#35;&amp;#120;&amp;#x36;&amp;#x39;&amp;#59;&amp;#38;&amp;#35;&amp;#x31;&amp;#49;&amp;#x35;&amp;#59;&amp;#38;&amp;#35;&amp;#x33;&amp;#x32;&amp;#x3B;&amp;#x26;&amp;#x23;&amp;#x78;&amp;#x37;&amp;#x34;&amp;#x3B;&amp;#x26;&amp;#x23;&amp;#49;&amp;#48;&amp;#x34;&amp;#x3B;&amp;#x26;&amp;#x23;&amp;#49;&amp;#48;&amp;#49;&amp;#x3B;&amp;#x26;&amp;#x23;&amp;#51;&amp;#50;&amp;#59;&amp;#38;&amp;#35;&amp;#x39;&amp;#57;&amp;#x3B;&amp;#x26;&amp;#x23;&amp;#x78;&amp;#x37;&amp;#53;&amp;#x3B;&amp;#x26;&amp;#x23;&amp;#x78;&amp;#x37;&amp;#x32;&amp;#x3B;&amp;#x26;&amp;#x23;&amp;#49;&amp;#x31;&amp;#x36;&amp;#x3B;&amp;#x26;&amp;#x23;&amp;#57;&amp;#x37;&amp;#59;&amp;#38;&amp;#35;&amp;#120;&amp;#x36;&amp;#x39;&amp;#59;&amp;#38;&amp;#35;&amp;#120;&amp;#x36;&amp;#x45;&amp;#59;&amp;#38;&amp;#35;&amp;#120;&amp;#51;&amp;#70;&amp;#59;
+
+</p>
+
+        <p id="hiddenText" style="color:#FFFFFF; font-size:30px;#hiddenText{user-select: none;-webkit-user-select: none;}"></p>
+        
+
+        <input id="answer" type="text" placeholder="答えを入力">
+        <button id="submit">回答する</button>
+        <p id="result"></p>
+    </body>
+    
+    <script>
+        const color = document.getElementById("pickedColor");
+        const textcolor = document.getElementById("textcolor");
+        const hiddenText = document.getElementById("hiddenText");
+        const answerInput = document.getElementById("answer");
+        const submit = document.getElementById("submit");
+        const result = document.getElementById("result");
+
+        const correctHash =
+            "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918";
+
+        const encryptedText = [
+            216, 1, 19, 183, 208, 32, 104, 84, 211, 154,
+            127, 216, 63, 167, 102, 158, 213, 10, 192, 166
+        ];
+
+        const encryptedPath = [
+            162, 70, 21, 137, 208, 32,
+            118, 58, 212, 135, 108, 216,
+            53, 192, 125, 171, 220, 11
+        ];
+
+        let isHint = false;
+
+        document.body.style.backgroundColor = "#FFFFFF";
+
+        async function sha256(text) {
+            const data = new TextEncoder().encode(text);
+            const buffer = await crypto.subtle.digest("SHA-256", data);
+
+            return new Uint8Array(buffer);
+        }
+
+        function decrypt(data, keyBytes) {
+            return data.map((code, i) =>
+                String.fromCharCode(
+                    code ^ keyBytes[i % keyBytes.length]
+                )
+            ).join("");
+        }
+
+        const colorCode = "#" + atob("QTUyQTJB");
+
+        textcolor.addEventListener("input", () => {
+            const value = textcolor.value.trim();
+
+            if (value.toLowerCase() === "brown") {
+                isHint = true;
+
+                document.body.style.backgroundColor = colorCode;
+                color.value = colorCode;
+
+                sha256("admin").then(keyBytes => {
+                    hiddenText.textContent = decrypt(encryptedText, keyBytes);
+                    hiddenText.style.color = colorCode;
+                });
+
+                return;
+            }
+
+            isHint = false;
+
+            if (CSS.supports("color", value)) {
+                document.body.style.backgroundColor = value;
+
+                const probe = document.createElement("div");
+                probe.style.color = value;
+                document.body.appendChild(probe);
+
+                const computed = getComputedStyle(probe).color;
+                probe.remove();
+
+                const match = computed.match(
+                    /^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/
+                );
+
+                if (match) {
+                    color.value = "#" + match.slice(1)
+                        .map(n => Number(n).toString(16).padStart(2, "0"))
+                        .join("");
+                }
+            }
+
+            hiddenText.style.color = document.body.style.backgroundColor;
+        });
+
+        color.addEventListener("input", () => {
+            document.body.style.backgroundColor = color.value;
+
+            if (isHint) {
+                hiddenText.style.color = colorCode;
+            } else {
+                textcolor.value = color.value;
+                hiddenText.style.color = color.value;
+            }
+        });
+
+        submit.addEventListener("click", async () => {
+            const answer = answerInput.value.trim().toLowerCase();
+            const hashBytes = await sha256(answer);
+
+            const hash = Array.from(hashBytes)
+                .map(byte => byte.toString(16).padStart(2, "0"))
+                .join("");
+
+            if (hash === correctHash) {
+                const nextPath = decrypt(encryptedPath, hashBytes);
+
+                result.textContent = "次へ進みます。";
+
+                const link = document.createElement("a");
+                link.href = nextPath;
+                link.textContent = "次へ";
+                result.appendChild(document.createElement("br"));
+                result.appendChild(link);
+            } else {
+                result.textContent = "答えが違います。";
+            }
+        });
+    </script>
+</html>
